@@ -3,6 +3,7 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
+        deleteDir()
         git(url: 'https://github.com/mhnj7/events-internal', branch: 'main')
       }
     }
