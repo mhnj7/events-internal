@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "nyc mocha --reporter mocha-junit-reporter --exit"
+    "test": "nyc mocha --exit"
   },
   "keywords": [],
   "author": "",
