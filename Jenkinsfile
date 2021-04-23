@@ -11,7 +11,6 @@ pipeline {
     stage('Test') {
       steps {
         sh 'npm install'
-        sh 'npm install mocha-junit-reporter --save-dev'
         sh 'npm test'
       }
     }
