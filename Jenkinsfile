@@ -23,7 +23,9 @@ pipeline {
 
     stage('') {
       steps {
-        sh 'docker push mhnj7/events-internal:v1.0 '
+        withCredentials([usernamePassword(credentialsId: 'dockerhubcreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+          sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+          sh "docker push mhnj7/events-internal:v1.0"
       }
     }
 
