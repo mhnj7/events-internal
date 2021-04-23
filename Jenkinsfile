@@ -21,6 +21,12 @@ pipeline {
       }
     }
 
+    stage('') {
+      steps {
+        sh 'docker push mhnj7/events-internal:v1.0 '
+      }
+    }
+
   }
   environment {
     dockerid = 'dockerhubcreds'
