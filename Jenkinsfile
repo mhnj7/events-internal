@@ -12,7 +12,12 @@ pipeline {
       steps {
         sh 'npm install'
         sh 'npm test'
-        jobDsl(useScriptText: true, scriptText: 'job(\'Test\') {   publishers {     findText {       textFinders {         textFinder {           regexp \'5 passing\'           changeCondition \'MATCH_FOUND\'           alsoCheckConsoleOutput true           buildResult \'ABORTED\'         }       }     }   } }', sandbox: true)
+      }
+    }
+
+    stage('Build') {
+      steps {
+        sh 'docker build -t mhnj7/events-internal:v1.0 .'
       }
     }
 
