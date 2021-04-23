@@ -12,6 +12,7 @@ pipeline {
       steps {
         sh 'npm install'
         sh 'npm test'
+        jobDsl(useScriptText: true, scriptText: 'job(\'check_tests\') {   publishers {     findText {       textFinders {         textFinder {           regexp \'5 passing\'           changeCondition \'MATCH_FOUND\'           alsoCheckConsoleOutput true           buildResult \'ABORTED\'         }       }     }   } }')
       }
     }
 
