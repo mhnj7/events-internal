@@ -12,8 +12,8 @@ node {
      }
    }
    stage('docker build/push') {
-     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-       def app = docker.build("wardviaene/docker-nodejs-demo:${commit_id}", '.').push()
+     docker.withRegistry('https://index.docker.io/v2/', 'dockerhubid') {
+       def app = docker.build("mhnj7/events-internal:v1.${commit_id}", '.').push()
      }
    }
 }
