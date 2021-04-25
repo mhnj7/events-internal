@@ -1,36 +1,19 @@
-pipeline {
-  agent any
-  stages {
-    stage('Clone') {
-      steps {
-        deleteDir()
-        git(url: 'https://github.com/mhnj7/events-internal', branch: 'main')
-      }
-    }
-
-    stage('Test') {
-      steps {
-        sh 'npm install'
-        sh 'npm test'
-      }
-    }
-
-    stage('Build') {
-      steps {
-        sh 'docker build -t mhnj7/events-internal:v1.0 .'
-      }
-    }
-
-    stage('') {
-      steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerhubcreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-          sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-          sh "docker push mhnj7/events-internal:v1.0"
-      }
-    }
-
-  }
-  environment {
-    dockerid = 'dockerhubcreds'
-  }
+node {
+   def commit_id
+   stage('Preparation') {
+     checkout scm
+     sh "git rev-parse --short HEAD > .git/commit-id"                        
+     commit_id = readFile('.git/commit-id').trim()
+   }
+   stage('test') {
+     nodejs(nodeJSInstallationName: 'nodejs') {
+       sh 'npm install --only=dev'
+       sh 'npm test'
+     }
+   }
+   stage('docker build/push') {
+     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+       def app = docker.build("wardviaene/docker-nodejs-demo:${commit_id}", '.').push()
+     }
+   }
 }
