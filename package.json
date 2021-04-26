@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "JUNIT_REPORT_PATH=./jrep/ nyc mocha --colors --reporter mocha-jenkins-reporter --exit"
+    "test": "JUNIT_REPORT_PATH=/report.xml nyc mocha --colors --reporter mocha-jenkins-reporter --exit"
   },
   "keywords": [],
   "author": "",
