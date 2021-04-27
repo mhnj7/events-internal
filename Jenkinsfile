@@ -29,6 +29,15 @@ node {
        }
     }
    
+   stage('quality gate'){
+      timeout(time: 5, unit: 'MIN') { // Just in case something goes wrong, pipeline will be killed after a timeout
+         def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+         if (qg.status != 'OK') {
+            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+         }
+      }
+   }
+   
    stage('docker build/push') {
      docker.withRegistry('https://index.docker.io/v1/', 'dockerhubid') {
        def app1 = docker.build(image + ":${BUILD_NUMBER}.${commit_id}", '.').push()
