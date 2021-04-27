@@ -24,8 +24,8 @@ node {
    
    stage('sonar-scanner') {
        def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-       withCredentials([string(credentialsId: 'sonarid', variable: 'sonarLogin')]) {
-           sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectKey=events-internal"
+       withSonarQubeEnv() {
+           sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=events-internal"
        }
     }
    
