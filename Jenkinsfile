@@ -42,10 +42,10 @@ node {
    
    stage('docker build/push') {
      docker.withRegistry('https://index.docker.io/v1/', 'dockerhubid') {
-        def image1 = image + ":${BUILD_NUMBER}.${commit_id}"
-        def image2 = image + ":latest"
-       def app1 = docker.build(image + ":${BUILD_NUMBER}.${commit_id}", '.').push()
-       def app2 = docker.build(image + ":latest", '.').push()
+        image1 = image + ":${BUILD_NUMBER}.${commit_id}"
+        image2 = image + ":latest"
+        def app1 = docker.build(image + ":${BUILD_NUMBER}.${commit_id}", '.').push()
+        def app2 = docker.build(image + ":latest", '.').push()
      }
    }
    
