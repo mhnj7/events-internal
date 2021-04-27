@@ -25,7 +25,7 @@ node {
    stage('sonar-scanner') {
        def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
        withSonarQubeEnv() {
-           sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=events-internal"
+           sh "${sonarqubeScannerHome}/bin/sonar-scanner -X -e -Dsonar.projectKey=events-internal"
        }
     }
    
