@@ -2,7 +2,7 @@ node {
    def commit_id
    def image = 'mhnj7/events-internal'
 
-   stage('Preparation') {
+   stage('clone') {
        deleteDir()
        sh "git clone 'https://github.com/mhnj7/events-internal' ."
        sh "git rev-parse --short HEAD > .git/commit-id"                        
