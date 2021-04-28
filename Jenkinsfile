@@ -1,7 +1,6 @@
 node {
    def commit_id
    def image = 'mhnj7/events-internal'
-   def gcrimage = 'gcr.io/events-demo-308800/events-internal:latest'
    def image1
    def image2
 
@@ -39,10 +38,6 @@ node {
       }
    }
    
-   stage('gcr build/push') {
-      sh "gcloud builds submit --tag ${gcrimage} ."
-   }
-   
    stage('docker build/push') {
      docker.withRegistry('https://index.docker.io/v1/', 'dockerhubid') {
         image1 = image + ":${BUILD_NUMBER}.${commit_id}"
@@ -54,8 +49,7 @@ node {
    
    stage('deploy') {
       sh "gcloud container clusters get-credentials devops-demo-cluster --zone us-east4-c --project events-demo-308800"
-      sh "kubectl delete -f kubernetes"
-      sh "kubectl apply -f kubernetes"
+      sh "kubectl apply --force -f kubernetes"
    }
    
    stage('cleanup') {
