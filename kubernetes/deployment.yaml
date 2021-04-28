@@ -16,7 +16,7 @@ spec:
         app: events-internal
     spec:
       containers:
-      - image: mhnj7/events-internal:latest
+      - image: gcr.io/events-demo-308800/events-internal:latest
         name: events-internal
         imagePullPolicy: "Always"
         resources:
