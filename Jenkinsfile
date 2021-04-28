@@ -1,7 +1,7 @@
 node {
    def commit_id
    def image = 'mhnj7/events-internal'
-   def gcpimage = 'gcr.io/events-demo-308800/events-internal:latest'
+   def gcrimage = 'gcr.io/events-demo-308800/events-internal:latest'
    def image1
    def image2
 
@@ -40,7 +40,7 @@ node {
    }
    
    stage('gcr build/push') {
-      sh "gcloud builds submit --tag gcr.io/events-demo-308800/events-internal:latest ."
+      sh "gcloud builds submit --tag ${gcrimage} ."
    }
    
    stage('docker build/push') {
