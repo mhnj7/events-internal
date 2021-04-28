@@ -64,7 +64,7 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message });
 });
 
-var PORT = 8082;
+const PORT = 8082;
 const server = app.listen(PORT, () => {
     const host = server.address().address;
     const port = server.address().port;
