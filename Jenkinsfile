@@ -54,6 +54,7 @@ node {
    
    stage('deploy') {
       sh "gcloud container clusters get-credentials devops-demo-cluster --zone us-east4-c --project events-demo-308800"
+      sh "kubectl delete -f kubernetes"
       sh "kubectl apply -f kubernetes"
    }
    
