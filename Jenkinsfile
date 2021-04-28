@@ -13,10 +13,8 @@ node {
    
    try {
       stage('test') {
-         nodejs(nodeJSInstallationName: 'nodejs') {
-            sh 'npm install'
-            sh 'npm test'
-         }
+         sh 'npm install'
+         sh 'npm test'
       }
    } catch (e) {
       throw e
