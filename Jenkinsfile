@@ -24,11 +24,13 @@ node {
    }
    
    stage('sonar-scanner') {
-       def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-       withSonarQubeEnv() {
-           sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=events-internal"
-       }
-    }
+      sh 'npm install @danmasta/mocha-sonar --save-dev'
+      sh 'npm coverage'
+      def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+      withSonarQubeEnv() {
+         sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=events-internal"
+      }
+   }
    
    stage('quality gate'){
       timeout(5) { // Just in case something goes wrong, pipeline will be killed after a timeout
