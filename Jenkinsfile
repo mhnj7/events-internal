@@ -24,8 +24,8 @@ node {
    }
    
    stage('sonar-scanner') {
-      sh 'npm install @danmasta/mocha-sonar --save-dev'
-      sh 'nyc --reporter=lcov mocha -R @danmasta/mocha-sonar ./test/*.js'
+      // sh 'npm install @danmasta/mocha-sonar --save-dev'
+      // sh 'nyc --reporter=lcov mocha -R @danmasta/mocha-sonar ./test/*.js'
       def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
       withSonarQubeEnv() {
          sh "${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectKey=events-internal"
