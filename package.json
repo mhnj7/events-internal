@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "JUNIT_REPORT_PATH=./report.xml nyc --reporter=lcov mocha --colors -R @danmasta/mocha-sonar ./test/*.js --reporter mocha-jenkins-reporter --exit"
+    "test": "JUNIT_REPORT_PATH=./report.xml nyc --reporter=lcov mocha --colors --reporter mocha-jenkins-reporter --exit"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,6 @@
     "mocha": "^7.1.2",
     "nyc": "^14.1.1",
     "supertest": "^4.0.2",
-    "mocha-jenkins-reporter": "0.4.5",
-    "@danmasta/mocha-sonar": "^1.0.1"
+    "mocha-jenkins-reporter": "0.4.5"
   }
 }
