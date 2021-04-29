@@ -3,6 +3,7 @@ node {
    def image = 'mhnj7/events-internal'
    def image1
    def image2
+   env.JENKINS_REPORTER_ENABLE_SONAR=true
 
    stage('clone') {
        deleteDir()
