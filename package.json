@@ -21,6 +21,6 @@
     "nyc": "^14.1.1",
     "supertest": "^4.0.2",
     "mocha-jenkins-reporter": "0.4.5",
-    "mocha-sonar": ""
+    "@danmasta/mocha-sonar": "^1.0.1"
   }
 }
